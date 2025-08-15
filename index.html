@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style/style.css">
 </head>
-<body>
+<body >
     <header>
         
         <section class="header__logo">
@@ -35,6 +35,38 @@
     </header>
 
     <main>
+        <div class="grid-container">
+            <section class="current-weather">
+                <div>
+                    <h1>Medellín</h1>
+                    <p>Chance of rain: 0%</p>
+                </div>
+                <img src="https://rodrigokamada.github.io/openweathermap/images/01d_t@4x.png" alt="">
+                <h2>31°</h2>
+            </section>
+
+            <section class="current-forecast">
+                <h2>today's forecast</h2>
+                <div class="current-forecast__cards-container">
+                    <article class="current-forecast__card">
+                        <h3>9:00 AM</h3>
+                        <img src="https://rodrigokamada.github.io/openweathermap/images/02n_t.png" alt="">
+                        <p>25°</p>
+                    </article>
+                    <article class="current-forecast__card">
+                        <h3>9:00 AM</h3>
+                        <img src="https://rodrigokamada.github.io/openweathermap/images/02d_t.png" alt="">
+                        <p>25°</p>
+                    </article>
+                    <article class="current-forecast__card">
+                        <h3>9:00 AM</h3>
+                        <img src="https://rodrigokamada.github.io/openweathermap/images/02d_t.png" alt="">
+                        <p>25°</p>
+                    </article>
+                </div>
+            </section>
+        </div>
+
         <dialog class="mobile-search">
             <form class="search-form">
                 <input class="search__input" type="text" placeholder="search city...">
