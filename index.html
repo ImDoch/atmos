@@ -11,9 +11,43 @@
 </head>
 <body>
     <header>
-        <h2>Atmos</h2>
-        <img src="https://rodrigokamada.github.io/openweathermap/images/01n_t.png" alt="">
-        <img src="https://rodrigokamada.github.io/openweathermap/images/01d_t.png" alt="">
+        
+        <section class="header__logo">
+            <img src="./assets/atmos-logo.svg" alt="Logo de Atmos">
+            <h2>Atmos</h2>
+        </section>
+        
+        <section class="search-container">
+            <button class="search__button search__button--mobile" type="button">
+                <img src="./assets/search-icon.svg" alt="search button">
+            </button>
+            <form class="search-form">
+                <input class="search__input" type="text" placeholder="search city...">
+                <button class="search__button" type="button" aria-label="search">
+                    <img src="./assets/search-icon.svg" alt="search button">
+                </button>
+            </form>
+            <button class="toggle-mode-button">
+                <img src="./assets/magic-icon-black.svg" alt="" aria-hidden="true">
+                <span>Magic</span>
+            </button>
+        </section>
     </header>
+
+    <main>
+        <dialog class="mobile-search">
+            <form class="search-form">
+                <input class="search__input" type="text" placeholder="search city...">
+                <button class="search__button" type="button" aria-label="search">
+                    <img src="./assets/search-icon.svg" alt="search button">
+                </button>
+                <button type="button" class="close-modal">
+                    <img src="./assets/close-icon-white.svg" alt="">
+                </button>
+            </form>
+        </dialog>
+    </main>
+
+    <script type="module" src="./src/app.js"></script>
 </body>
 </html>
