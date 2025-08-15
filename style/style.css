@@ -59,8 +59,8 @@ body {
   }
 }
 body.light {
-    --bg-dark: hsl(0 0% 90%);
-    --bg: hsl(0 0% 95%);
+    --bg-dark: hsl(0 0% 85%);
+    --bg: hsl(0 0% 90%);
     --bg-light: hsl(0 0% 100%);
     --text: hsl(0 0% 5%);
     --text-muted: hsl(0 0% 30%);
@@ -200,6 +200,7 @@ header {
 /*grid container*/
 .grid-container {
     margin-top: 70px;
+    padding-bottom: 30px;
     display: grid;
     justify-items: center;
     gap: 20px;
@@ -209,7 +210,14 @@ header {
     "five-days-forecast"
     "air-conditions";
 
+    h2 {
+        margin-bottom: 20px;
+        font-size: var(--fs-h3);
+        text-transform: uppercase;
+        color: var(--text);
+    }
     .current-weather {
+        width: 90%;
         grid-area: current-weather;
         display: flex;
         flex-direction: column;
@@ -227,20 +235,12 @@ header {
 
     .current-forecast {
         width: 90%;
-        grid-area: current-forecast;
         padding: 20px;
+        grid-area: current-forecast;
         border-radius: 20px;
         background-color: var(--bg);
-
-        h2 {
-            margin-bottom: 20px;
-            font-size: var(--fs-h3);
-            text-transform: uppercase;
-            color: var(--text);
-        }
         
         .current-forecast__cards-container {
-            padding: 10px;
             display: flex;
             align-items: center;
             flex-wrap: wrap;
@@ -265,6 +265,88 @@ header {
                 }
             }
         }
+    }
+
+    .five-days-forecast {
+        width: 90%;
+        padding: 20px;
+        grid-area: five-days-forecast;
+        border-radius: 20px;
+        background-color: var(--bg);
+        
+        .five-days-forecast__cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            .five-days-forecast__card {
+                display: grid;
+                grid-template-columns: 1fr 2fr 1fr;
+                align-items: center;
+                justify-items: center;
+                border-radius: 10px;
+                background-color: var(--bg-light);
+                p{
+                    display: flex;
+                    align-items: center;
+                    gap: 2px;
+                    font-weight: 500;
+                    color: var(--text-muted);
+                }
+                span {
+                    font-size: var(--fs-h4);
+                    font-weight: bold;
+                    color: var(--text);
+                }
+                div {
+                    display: flex;
+                    align-items: center;
+                    color: var(--text);
+                }
+            }
+        }
+    }
+
+    .air-conditions {
+        width: 90%;
+        padding: 20px;
+        grid-area: air-conditions;
+        border-radius: 20px;
+        background-color: var(--bg);
+
+        .air-conditions__cards-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            row-gap: 10px;
+
+            .air-conditions__card {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+
+                div {
+                    display: flex;
+                    align-items: center;
+
+                    p{
+                        color: var(--text-muted);
+                    }
+                }
+
+                h3 {
+                    margin-left: 24px;
+                    color: var(--text);
+                }
+            }
+        }
+    }
+
+    @media (width > 768px) {
+        grid-template-columns: 2fr 1fr;
+        grid-template-areas: 
+            "current-weather current-weather"
+            "current-forecast five-days-forecast"
+            "air-conditions five-days-forecast";
     }
 }
 
