@@ -6,7 +6,7 @@
     --text: hsl(0 0% 95%);
     --text-muted: hsl(0 0% 70%);
     --main-color: hsl(12 78% 61%);
-    --secoundary-color: hsl(12 78% 71%);
+    --secoundary-color: hsl(12 60% 50% / .5);
     --border: hsl(0 0% 30%);
 
     --fs-h1: clamp(2.4rem, 2rem + 2.5vw, 4.4rem);
@@ -175,7 +175,7 @@ header {
     padding: 24px;
     width: clamp(300px, 90%, 600px);
     border-radius: 12px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--secoundary-color);
     background-color: var(--bg);
     
     .search-form {
@@ -197,8 +197,8 @@ header {
     }
 }
 
-/*grid container*/
-.grid-container {
+/*weather grid container y secciones */
+.weather-grid-container {
     margin-top: 70px;
     padding-bottom: 30px;
     display: grid;
@@ -227,6 +227,9 @@ header {
         background-color: var(--bg-dark);
         h1, h2 {
             color: var(--text);
+        }
+        h2 {
+            font-size: var(--fs-h1);
         }
         p {
             color: var(--text-muted);
@@ -350,6 +353,47 @@ header {
     }
 }
 
+/*seccion de busqueda*/
+.search-results-container {
+    margin-top: 65px;
+    padding: 20px;
+    h1 {
+        margin-bottom: 20px;
+        color: var(--main-color);
+    }
+
+    .search-results__cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(auto, 400px));
+        justify-content: center;
+        gap: 12px;
+
+        .search-results__card {
+            padding: 10px 20px 10px 0;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            align-items: center;
+            border-radius: 10px;
+            background-color: var(--bg);
+            cursor: pointer;
+
+            h2, h3 {
+                color: var(--text);
+            }
+            h3 {
+                justify-self: end;
+                font-size: var(--fs-h2);
+            }
+            p {
+                color: var(--text-muted);
+            }
+
+            &:hover {
+                background-color: var(--secoundary-color);
+            }
+        }
+    }
+}
 
 /*utils*/
 .hidden.hidden {
