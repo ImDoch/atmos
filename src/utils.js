@@ -1,4 +1,4 @@
-import { magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon } from "./nodes.js"
+import { magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon, currentWeatherSection } from "./nodes.js"
 
 //cambio de modo
 const toggleMode = () => {
@@ -24,4 +24,23 @@ const toggleMode = () => {
     
 }
 
-export {toggleMode}
+//crear current weather section
+const createCurrentWeather = (location, container) => {
+    const div = document.createElement('div')
+    const cityName = document.createElement('h1')
+    cityName.textContent = location.name
+    const feelsLikeInfo = document.createElement('p')
+    feelsLikeInfo.textContent = `Feels Like: ${location.main.feels_like}°`
+
+    const weatherImage = document.createElement('img')
+    weatherImage.src = `https://rodrigokamada.github.io/openweathermap/images/${location.weather[0].icon}_t@4x.png`
+
+    const currentTemperature = document.createElement('h2')
+    currentTemperature.textContent = `${location.main.temp}°`
+
+    div.append(cityName, feelsLikeInfo)
+    currentWeatherSection.append(div, weatherImage, currentTemperature)
+    container.appendChild(currentWeatherSection)
+}
+
+export {toggleMode, createCurrentWeather}

@@ -8,10 +8,12 @@ const uvIndexIcon = document.querySelector('.uv-index-icon')
 const searchButtonMobile = document.querySelector('.search__button--mobile')
 
 //nodos relacionados con las vistas
-const mainWeatherView = document.querySelector('.weather-grid-container')
-const searchView = document.querySelector('.search-results-container')
+const mainWeatherContainer = document.querySelector('.weather-grid-container')
+const searchContainer = document.querySelector('.search-results-container')
 const backButton = document.querySelector('.back-button')
 const mobileSearchButton = document.querySelector('.search__button--mobile')
 const searchInput = document.querySelector('.search__input')
 
-export { toggleModeButton, magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon, searchButtonMobile, mainWeatherView, searchView, backButton, mobileSearchButton, searchInput }
+const currentWeatherSection = document.querySelector('.current-weather')
+
+export { toggleModeButton, magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon, searchButtonMobile, mainWeatherContainer, searchContainer, backButton, mobileSearchButton, searchInput, currentWeatherSection }

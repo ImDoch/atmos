@@ -1,4 +1,5 @@
-import { mainWeatherView, searchView, backButton } from "./nodes.js"
+import { mainWeatherContainer, searchContainer, backButton } from "./nodes.js"
+import { getActualLocation, getCurrentWeather } from "./services.js"
 
 const navigator = () => {
     if(location.hash.startsWith('#search=')) {
@@ -10,23 +11,27 @@ const navigator = () => {
     else {
         homePage()
     }
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
 }
 
-const homePage = () => {
-    mainWeatherView.classList.remove('hidden')
-    searchView.classList.add('hidden')
+const homePage = async () => {
+    mainWeatherContainer.classList.remove('hidden')
+    searchContainer.classList.add('hidden')
+    const { lat, lon } = await getActualLocation()
+    getCurrentWeather(lat, lon)
     backButton.classList.add('hidden')
 }
 
 const weatherPage = () => {
-    mainWeatherView.classList.remove('hidden')
-    searchView.classList.add('hidden')
+    mainWeatherContainer.classList.remove('hidden')
+    searchContainer.classList.add('hidden')
     backButton.classList.remove('hidden')
 }
 
 const searchPage = () => {
-    mainWeatherView.classList.add('hidden')
-    searchView.classList.remove('hidden')
+    mainWeatherContainer.classList.add('hidden')
+    searchContainer.classList.remove('hidden')
     backButton.classList.remove('hidden')
 }
 
