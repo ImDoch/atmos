@@ -96,6 +96,22 @@ body.light {
     }
 }
 
+.back-button {
+    padding: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    border: 1px solid var(--main-color);
+    background-color: var(--bg-light);
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--secoundary-color);
+    }
+}
 /*header*/
 header {
     width: 100%;
@@ -106,6 +122,7 @@ header {
     display: flex;
     justify-content: space-between;
     background-color: var(--bg-dark);
+    z-index: 1;
 
     .header__logo {
         display: flex;
@@ -169,33 +186,6 @@ header {
         }
     }
 }
-/*modal de busqueda en moviles*/
-.mobile-search {
-    margin: auto;
-    padding: 24px;
-    width: clamp(300px, 90%, 600px);
-    border-radius: 12px;
-    border: 1px solid var(--secoundary-color);
-    background-color: var(--bg);
-    
-    .search-form {
-        display: flex;
-        justify-content: center;
-        position: relative;
-
-        .search__button {
-            border-radius: 0 10px 10px 0;
-        }
-        .close-modal {
-            position: absolute;
-            top: -22px;
-            right: -22px;
-            border: none;
-            background-color: transparent;
-            cursor: pointer;
-        }
-    }
-}
 
 /*weather grid container y secciones */
 .weather-grid-container {
@@ -218,6 +208,7 @@ header {
     }
     .current-weather {
         width: 90%;
+        position: relative;
         grid-area: current-weather;
         display: flex;
         flex-direction: column;
@@ -225,6 +216,7 @@ header {
         align-items: center;
         text-align: center;
         background-color: var(--bg-dark);
+
         h1 {
             color: var(--main-color);
         }
@@ -357,16 +349,26 @@ header {
 
 /*seccion de busqueda*/
 .search-results-container {
-    margin-top: 65px;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 75px;
     padding: 20px;
-    h1 {
-        margin-bottom: 20px;
-        color: var(--main-color);
+    position: relative;
+    
+    .search-form {
+        margin-top: 25px;
+        display: flex;
+        justify-self: center;
+
+        .search__button {
+            border-radius: 0 10px 10px 0;
+        }
     }
 
     .search-results__cards-container {
+        margin-top: 25px;
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(auto, 400px));
+        grid-template-columns: repeat(auto-fill, minmax(288px, 370px));
         justify-content: center;
         gap: 12px;
 
@@ -393,6 +395,12 @@ header {
             &:hover {
                 background-color: var(--secoundary-color);
             }
+        }
+    }
+
+    @media (width > 768px) {
+        .search-form {
+            display: none;
         }
     }
 }

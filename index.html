@@ -35,8 +35,11 @@
     </header>
 
     <main>
-        <div class="weather-grid-container">
+        <div class="weather-grid-container hidden">
             <section class="current-weather">
+                <button class="back-button">
+                    <img src="./assets/arrow-back-icon.svg" alt="">
+                </button>
                 <div>
                     <h1>Medellín</h1>
                     <p>Chance of rain: 0%</p>
@@ -131,8 +134,16 @@
             </section>
         </div>
 
-        <section class="search-results-container hidden">
-            <h1>Searching...</h1>
+        <section class="search-results-container">
+            <button class="back-button">
+                <img src="./assets/arrow-back-icon.svg" alt="">
+            </button>
+            <form class="search-form ">
+                <input class="search__input" type="text" placeholder="search city...">
+                <button class="search__button" type="button" aria-label="search">
+                    <img src="./assets/search-icon.svg" alt="search button">
+                </button>
+            </form>
             <div class="search-results__cards-container">
                 <article class="search-results__card">
                     <img src="https://rodrigokamada.github.io/openweathermap/images/01d_t@2x.png" alt="">
@@ -160,18 +171,6 @@
                 </article>
             </div>
         </section>
-
-        <dialog class="mobile-search">
-            <form class="search-form">
-                <input class="search__input" type="text" placeholder="search city...">
-                <button class="search__button" type="button" aria-label="search">
-                    <img src="./assets/search-icon.svg" alt="search button">
-                </button>
-                <button type="button" class="close-modal">
-                    <img src="./assets/close-icon-white.svg" alt="">
-                </button>
-            </form>
-        </dialog>
     </main>
 
     <script type="module" src="./src/app.js"></script>
