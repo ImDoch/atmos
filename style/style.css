@@ -216,14 +216,15 @@ header {
         width: 90%;
         position: relative;
         grid-area: current-weather;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        gap: 20px;
-        text-align: center;
         background-color: var(--bg-dark);
-
+        div {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            text-align: center;
+        }
         h1 {
             color: var(--text);
         }

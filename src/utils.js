@@ -41,7 +41,8 @@ const toggleMode = () => {
 }
 
 //crear elementos dinamicos de current weather
-const createCurrentWeather = (location, currentCityName,container) => {
+const createCurrentWeather = (location, currentCityName) => {
+    currentWeatherSection.innerHTML = ''
     const div = document.createElement('div')
     const cityName = document.createElement('h1')
     const feelsLikeInfo = document.createElement('p')
@@ -61,7 +62,6 @@ const createCurrentWeather = (location, currentCityName,container) => {
 
     div.append(cityName, feelsLikeInfo)
     currentWeatherSection.append(div, weatherIcon, currentTemperature)
-    container.appendChild(currentWeatherSection)
 }
 
 export {toggleMode, createCurrentWeather}

@@ -14,6 +14,6 @@ const backButton = document.querySelector('.back-button')
 const mobileSearchButton = document.querySelector('.search__button--mobile')
 const searchInput = document.querySelector('.search__input')
 
-const currentWeatherSection = document.querySelector('.current-weather')
+const currentWeatherSection = document.querySelector('.current-weather__content')
 
 export { toggleModeButton, magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon, searchButtonMobile, mainWeatherContainer, searchContainer, backButton, mobileSearchButton, searchInput, currentWeatherSection }
