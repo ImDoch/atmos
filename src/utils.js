@@ -47,7 +47,7 @@ const createCurrentWeather = (location, currentCityName,container) => {
     const feelsLikeInfo = document.createElement('p')
     feelsLikeInfo.textContent = `Feels Like: ${location.currently.apparentTemperature}°`
 
-    const weatherIcon = document.querySelector('i')
+    const weatherIcon = document.createElement('i')
     weatherIcon.classList.add('wi', `${iconMapping[location.currently.icon]}`)
 
     const currentTemperature = document.createElement('h2')

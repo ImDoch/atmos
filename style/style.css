@@ -269,7 +269,7 @@ header {
                 h3 {
                     color: var(--text);
                 }
-                & .wi {
+                .wi {
                     font-size: 3.5rem;
                 }
                 p {
@@ -280,7 +280,7 @@ header {
             }
         }
     }
-
+    
     .five-days-forecast {
         width: 90%;
         padding: 20px;
