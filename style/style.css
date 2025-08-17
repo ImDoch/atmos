@@ -214,19 +214,27 @@ header {
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+        gap: 20px;
         text-align: center;
         background-color: var(--bg-dark);
 
         h1 {
+            color: var(--text);
+        }
+        p {
+            color: var(--text-muted);
+        }
+        i {
+            font-size: 8rem;
+            line-height: 1;
+            transform: translateY(10%);
             color: var(--main-color);
         }
         h2 {
             font-size: var(--fs-h1);
             color: var(--text);
         }
-        p {
-            color: var(--text-muted);
-        }
+        
     }
 
     .current-forecast {

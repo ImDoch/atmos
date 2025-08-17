@@ -1,5 +1,5 @@
 import { mainWeatherContainer, searchContainer, backButton } from "./nodes.js"
-import { getCurrentWeather, getTodaysForecast } from "./services.js"
+import { getCurrentWeather } from "./services.js"
 
 const appNavigator = () => {
     if(location.hash.startsWith('#search=')) {
@@ -25,7 +25,6 @@ const homePage = async () => {
             const lat = pos.coords.latitude;
             const lon = pos.coords.longitude;
             getCurrentWeather(lat, lon)
-            getTodaysForecast(lat, lon)
         },
         (err) => {
             console.error("Error:", err.message);
