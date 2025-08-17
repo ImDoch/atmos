@@ -1,6 +1,6 @@
 import { toggleModeButton, mobileSearchButton, searchInput } from "./nodes.js"
 import { toggleMode } from "./utils.js"
-import { navigator } from "./navigation.js"
+import { appNavigator } from "./navigation.js"
 
 mobileSearchButton.addEventListener('click', () => location.hash = '#search=')
 searchInput.addEventListener('input', (even) => {
@@ -8,8 +8,8 @@ searchInput.addEventListener('input', (even) => {
 })
 
 //cambiar vistas
-window.addEventListener('DOMContentLoaded', navigator, false)
-window.addEventListener('hashchange', navigator, false)
+window.addEventListener('DOMContentLoaded', appNavigator, false)
+window.addEventListener('hashchange', appNavigator, false)
 
 //cambiar de modo
 toggleModeButton.addEventListener('click', () => { 

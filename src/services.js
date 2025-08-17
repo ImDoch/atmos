@@ -6,20 +6,16 @@ const fetchData = async (url) => {
     const data = await response.json()
     return data
 }
-const getActualLocation= async () => {
-    const actualLocation = await fetchData('https://ipapi.co/json/')
-    const lat = actualLocation.latitude
-    const lon = actualLocation.longitude
-    return {
-        lat,
-        lon
-    }
-}
 
 const getCurrentWeather = async (lat, lon) => {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${OPEN_WEATHER_API_KEY}`)
-    const weather = await response.json()
+    const weather = await fetchData(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${OPEN_WEATHER_API_KEY}`)
     createCurrentWeather(weather, mainWeatherContainer)
 }
 
-export { getActualLocation, getCurrentWeather }
+const getTodaysForecast = async (lat, lon) => {
+    const fiveDaysForecast = await fetchData(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${OPEN_WEATHER_API_KEY}`)
+    console.log(fiveDaysForecast);
+    
+}
+
+export { getCurrentWeather, getTodaysForecast}
