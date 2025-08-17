@@ -20,18 +20,7 @@ const homePage = async () => {
     searchContainer.classList.add('hidden')
     backButton.classList.add('hidden')
 
-    navigator.geolocation.getCurrentPosition(
-        (pos) => {
-            const lat = pos.coords.latitude;
-            const lon = pos.coords.longitude;
-            getCurrentWeather(lat, lon)
-        },
-        (err) => {
-            console.error("Error:", err.message);
-        }
-    );
-    
-
+    getCurrentWeather()
 }
 
 const weatherPage = () => {

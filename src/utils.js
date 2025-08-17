@@ -40,22 +40,27 @@ const toggleMode = () => {
     
 }
 
-//crear current weather section
-const createCurrentWeather = (location, container) => {
+//crear elementos dinamicos de current weather
+const createCurrentWeather = (location, currentCityName,container) => {
     const div = document.createElement('div')
     const cityName = document.createElement('h1')
-    cityName.textContent = location.name
     const feelsLikeInfo = document.createElement('p')
-    feelsLikeInfo.textContent = `Feels Like: ${location.main.feels_like}°`
+    feelsLikeInfo.textContent = `Feels Like: ${location.currently.apparentTemperature}°`
 
-    const weatherImage = document.createElement('img')
-    weatherImage.src = `https://rodrigokamada.github.io/openweathermap/images/${location.weather[0].icon}_t@4x.png`
+    const weatherIcon = document.querySelector('i')
+    weatherIcon.classList.add('wi', `${iconMapping[location.currently.icon]}`)
 
     const currentTemperature = document.createElement('h2')
-    currentTemperature.textContent = `${location.main.temp}°`
+    currentTemperature.textContent = `${location.currently.temperature}°`
+
+    if (currentCityName === undefined ) {
+        cityName.textContent = 'ciudad'
+    } else {
+        cityName.textContent = currentCityName
+    }
 
     div.append(cityName, feelsLikeInfo)
-    currentWeatherSection.append(div, weatherImage, currentTemperature)
+    currentWeatherSection.append(div, weatherIcon, currentTemperature)
     container.appendChild(currentWeatherSection)
 }
 
