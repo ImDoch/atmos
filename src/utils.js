@@ -1,4 +1,4 @@
-import { magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon, currentWeatherSection, currentForecastCardsContainer } from "./nodes.js"
+import { magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon, currentWeatherSection, currentForecastCardsContainer, sevenDaysForecastCardsContainer } from "./nodes.js"
 
 const iconMapping = {
   "clear-day": "wi-day-sunny",
@@ -18,12 +18,19 @@ const iconMapping = {
 
 const formatHour = (timestamp) => {
     const date = new Date(timestamp * 1000)
-    return date.toLocaleTimeString(undefined, {
+    return date.toLocaleTimeString('en-US', {
         hour: "numeric",
         minute: "2-digit"
     });
 }
 
+const formatDay = (timestamp) => {
+    const date = new Date(timestamp * 1000)
+    return new Intl.DateTimeFormat('en-US', {
+        weekday: 'short'
+    }).format(date)
+
+}
 //cambio de modo
 const toggleMode = () => {
     document.body.classList.toggle('light')
@@ -62,18 +69,18 @@ const createCurrentWeather = (localClimate, currentCityName) => {
     }
 
     const feelsLikeInfo = document.createElement('p')
-    feelsLikeInfo.textContent = `Feels Like: ${localClimate.currently.apparentTemperature}°`
+    feelsLikeInfo.textContent = `Feels Like: ${Math.round(localClimate.currently.apparentTemperature)}°`
     const weatherIcon = document.createElement('i')
     weatherIcon.classList.add('wi', `${iconMapping[localClimate.currently.icon]}`)
 
     const currentTemperature = document.createElement('h2')
-    currentTemperature.textContent = `${localClimate.currently.temperature}°`
+    currentTemperature.textContent = `${Math.round(localClimate.currently.temperature)}°`
 
     div.append(cityName, feelsLikeInfo)
     currentWeatherSection.append(div, weatherIcon, currentTemperature)
 }
 
-const createCurrentForecastCard = (localClimate) => {
+const createTodaysForecastCard = (localClimate) => {
     currentForecastCardsContainer.innerHTML = ''
 
     const hourlyForecast = localClimate.hourly.data
@@ -115,7 +122,7 @@ const createCurrentForecastCard = (localClimate) => {
         weatherIcon.classList.add('wi', `${iconMapping[forecast.icon]}`)
 
         const temperature = document.createElement('p')
-        temperature.textContent = `${forecast.temperature}°`
+        temperature.textContent = `${Math.round(forecast.temperature)}°`
 
         currentForecastCard.append(hour, weatherIcon, temperature)
 
@@ -125,5 +132,43 @@ const createCurrentForecastCard = (localClimate) => {
     currentForecastCardsContainer.append(...hourlyForecastCards)
 }
 
+const createSevenDaysForecastCard = (localClimate) => {
+    sevenDaysForecastCardsContainer.innerHTML = ''
+    const dailyForecast = localClimate.daily.data
+    const sevenDaysForecastCards = dailyForecast.slice(0, 7).map((forecast, index) => {
+        if(index === 0) forecast.time = 'Today'
+        
+        const sevenDaysForecastCard = document.createElement('article')
+        sevenDaysForecastCard.classList.add('seven-days-forecast__card')
 
-export {toggleMode, createCurrentWeather, createCurrentForecastCard}
+        const dayOfWeek = document.createElement('p')
+        if(forecast.time === 'Today') {
+            dayOfWeek.textContent = forecast.time
+        }
+        else {
+            dayOfWeek.textContent = formatDay(forecast.time)
+        }
+
+        const div = document.createElement('div')
+        
+        const weatherIcon = document.createElement('i')
+        weatherIcon.classList.add('wi', `${iconMapping[forecast.icon]}`)
+
+        const weatherType = document.createElement('h3')
+        weatherType.textContent = forecast.precipType
+
+        const minMaxTemperature = document.createElement('p')
+        const maxTemperature = document.createElement('span')
+        maxTemperature.textContent = `${Math.round(forecast.apparentTemperatureMax)}°`
+        const minTemperature = document.createTextNode(`/${Math.round(forecast.apparentTemperatureMin)}°`)
+
+        div.append(weatherIcon, weatherType)
+        minMaxTemperature.append(maxTemperature, minTemperature)
+        sevenDaysForecastCard.append(dayOfWeek, div, minMaxTemperature)
+        return sevenDaysForecastCard
+    })
+    sevenDaysForecastCardsContainer.append(...sevenDaysForecastCards)
+}
+
+
+export {toggleMode, createCurrentWeather, createTodaysForecastCard, createSevenDaysForecastCard}

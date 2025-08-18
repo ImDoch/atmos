@@ -13,7 +13,7 @@ const getCurrentLocation = () => {
 }
 
 const getCurrentWeather = async (lat, lon) => {
-    const weather = await fetchData(`https://api.pirateweather.net/forecast/${PIRATE_WEATHER_API_KEY}/${lat},${lon}?units=si&extend=hourly`)
+    const weather = await fetchData(`https://api.pirateweather.net/forecast/${PIRATE_WEATHER_API_KEY}/${lat},${lon}?units=si`)
     return weather
 }
 

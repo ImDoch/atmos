@@ -18,4 +18,6 @@ const currentWeatherSection = document.querySelector('.current-weather__content'
 
 const currentForecastCardsContainer = document.querySelector('.current-forecast__cards-container')
 
-export { toggleModeButton, magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon, searchButtonMobile, mainWeatherContainer, searchContainer, backButton, mobileSearchButton, searchInput, currentWeatherSection, currentForecastCardsContainer }
+const sevenDaysForecastCardsContainer = document.querySelector('.seven-days-forecast__cards-container')
+
+export { toggleModeButton, magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon, searchButtonMobile, mainWeatherContainer, searchContainer, backButton, mobileSearchButton, searchInput, currentWeatherSection, currentForecastCardsContainer, sevenDaysForecastCardsContainer }

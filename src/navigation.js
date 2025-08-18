@@ -1,6 +1,6 @@
 import { mainWeatherContainer, searchContainer, backButton } from "./nodes.js"
 import { getCurrentWeather, getCurrentCityName, getCurrentLocation } from "./services.js"
-import { createCurrentWeather, createCurrentForecastCard } from "./utils.js"
+import { createCurrentWeather, createTodaysForecastCard, createSevenDaysForecastCard } from "./utils.js"
 
 const appNavigator = () => {
     if(location.hash.startsWith('#search=')) {
@@ -30,7 +30,9 @@ const homePage = async () => {
     console.log(weather)
 
     createCurrentWeather(weather, cityName)
-    createCurrentForecastCard(weather)
+    createTodaysForecastCard(weather)
+    createSevenDaysForecastCard(weather)
+
 }
 
 const weatherPage = () => {
