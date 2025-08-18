@@ -26,11 +26,11 @@ const homePage = async () => {
     const lon = location.coords.longitude
     const weather = await getCurrentWeather(lat, lon)
     const cityName = await getCurrentCityName(lat, lon)
-    createCurrentForecastCard(weather)
 
     console.log(weather)
 
     createCurrentWeather(weather, cityName)
+    createCurrentForecastCard(weather)
 }
 
 const weatherPage = () => {

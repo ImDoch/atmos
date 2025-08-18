@@ -18,7 +18,10 @@ const iconMapping = {
 
 const formatHour = (timestamp) => {
     const date = new Date(timestamp * 1000)
-    return date.getHours().toString().padStart(2, '0') + ':00'
+    return date.toLocaleTimeString(undefined, {
+        hour: "numeric",
+        minute: "2-digit"
+    });
 }
 
 //cambio de modo
@@ -48,22 +51,23 @@ const toggleMode = () => {
 //crear elementos dinamicos de current weather
 const createCurrentWeather = (localClimate, currentCityName) => {
     currentWeatherSection.innerHTML = ''
+
     const div = document.createElement('div')
+
     const cityName = document.createElement('h1')
-    const feelsLikeInfo = document.createElement('p')
-    feelsLikeInfo.textContent = `Feels Like: ${localClimate.currently.apparentTemperature}°`
-
-    const weatherIcon = document.createElement('i')
-    weatherIcon.classList.add('wi', `${iconMapping[localClimate.currently.icon]}`)
-
-    const currentTemperature = document.createElement('h2')
-    currentTemperature.textContent = `${localClimate.currently.temperature}°`
-
     if (currentCityName === undefined ) {
         cityName.textContent = 'ciudad'
     } else {
         cityName.textContent = currentCityName
     }
+
+    const feelsLikeInfo = document.createElement('p')
+    feelsLikeInfo.textContent = `Feels Like: ${localClimate.currently.apparentTemperature}°`
+    const weatherIcon = document.createElement('i')
+    weatherIcon.classList.add('wi', `${iconMapping[localClimate.currently.icon]}`)
+
+    const currentTemperature = document.createElement('h2')
+    currentTemperature.textContent = `${localClimate.currently.temperature}°`
 
     div.append(cityName, feelsLikeInfo)
     currentWeatherSection.append(div, weatherIcon, currentTemperature)
@@ -71,6 +75,7 @@ const createCurrentWeather = (localClimate, currentCityName) => {
 
 const createCurrentForecastCard = (localClimate) => {
     currentForecastCardsContainer.innerHTML = ''
+
     const hourlyForecast = localClimate.hourly.data
     const actualData = new Date()
     const actualDay = actualData.getDate()
@@ -98,7 +103,26 @@ const createCurrentForecastCard = (localClimate) => {
         const hour = new Date(forecast.time * 1000).getHours()
         return hour % 3 === 0
     })
-    console.log(threeHourForecast)
+
+    const hourlyForecastCards = threeHourForecast.map(forecast => {
+        const currentForecastCard = document.createElement('article')
+        currentForecastCard.classList.add('current-forecast__card')
+
+        const hour = document.createElement('h3')
+        hour.textContent = formatHour(forecast.time)
+
+        const weatherIcon = document.createElement('i')
+        weatherIcon.classList.add('wi', `${iconMapping[forecast.icon]}`)
+
+        const temperature = document.createElement('p')
+        temperature.textContent = `${forecast.temperature}°`
+
+        currentForecastCard.append(hour, weatherIcon, temperature)
+
+        return currentForecastCard
+    })
+
+    currentForecastCardsContainer.append(...hourlyForecastCards)
 }
 
 
