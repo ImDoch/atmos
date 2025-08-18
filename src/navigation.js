@@ -1,6 +1,6 @@
 import { mainWeatherContainer, searchContainer, backButton } from "./nodes.js"
 import { getCurrentWeather, getCurrentCityName, getCurrentLocation } from "./services.js"
-import { createCurrentWeather } from "./utils.js"
+import { createCurrentWeather, createCurrentForecastCard } from "./utils.js"
 
 const appNavigator = () => {
     if(location.hash.startsWith('#search=')) {
@@ -26,6 +26,9 @@ const homePage = async () => {
     const lon = location.coords.longitude
     const weather = await getCurrentWeather(lat, lon)
     const cityName = await getCurrentCityName(lat, lon)
+    createCurrentForecastCard(weather)
+
+    console.log(weather)
 
     createCurrentWeather(weather, cityName)
 }
