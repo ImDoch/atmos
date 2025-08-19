@@ -251,10 +251,13 @@ header {
         width: 90%;
         padding: 20px;
         grid-area: current-forecast;
+        display: flex;
+        flex-direction: column;
         border-radius: 20px;
         background-color: var(--bg);
         
         .current-forecast__cards-container {
+            margin: auto 0;
             display: flex;
             align-items: center;
             flex-wrap: wrap;
@@ -366,15 +369,15 @@ header {
         background-color: var(--bg);
 
         .air-conditions__cards-container {
+            margin: auto 0;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            margin: auto 0;
-            row-gap: 10px;
+            row-gap: 20px;
 
             .air-conditions__card {
                 display: flex;
                 flex-direction: column;
-                gap: 8px;
+                gap: 4px;
 
                 div {
                     display: flex;
@@ -436,9 +439,15 @@ header {
             border-radius: 10px;
             background-color: var(--bg);
             cursor: pointer;
-            .wi {
-                font-size: 4rem;
-            }
+            & div:nth-child(1) {
+                width: 60px;
+                height: 60px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 40px;
+                line-height: 1;
+            }   
             h2, h3 {
                 color: var(--text);
             }
