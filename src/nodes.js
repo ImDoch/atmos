@@ -14,10 +14,13 @@ const backButton = document.querySelector('.back-button')
 const mobileSearchButton = document.querySelector('.search__button--mobile')
 const searchInput = document.querySelector('.search__input')
 
+//Nodos para renderizar la información
 const currentWeatherSection = document.querySelector('.current-weather__content')
-
 const currentForecastCardsContainer = document.querySelector('.current-forecast__cards-container')
-
 const sevenDaysForecastCardsContainer = document.querySelector('.seven-days-forecast__cards-container')
+const airConditionsRealFeel = document.querySelector('.air-conditions__real-feel')
+const airConditionsWind = document.querySelector('.air-conditions__wind')
+const airConditionsChanceRain = document.querySelector('.air-conditions__chance-rain')
+const airConditionsUvIndex = document.querySelector('.air-conditions__uv-index')
 
-export { toggleModeButton, magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon, searchButtonMobile, mainWeatherContainer, searchContainer, backButton, mobileSearchButton, searchInput, currentWeatherSection, currentForecastCardsContainer, sevenDaysForecastCardsContainer }
+export { toggleModeButton, magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon, searchButtonMobile, mainWeatherContainer, searchContainer, backButton, mobileSearchButton, searchInput, currentWeatherSection, currentForecastCardsContainer, sevenDaysForecastCardsContainer, airConditionsRealFeel, airConditionsWind, airConditionsChanceRain, airConditionsUvIndex }

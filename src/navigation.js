@@ -1,4 +1,4 @@
-import { mainWeatherContainer, searchContainer, backButton } from "./nodes.js"
+import { mainWeatherContainer, searchContainer, backButton, airConditionsRealFeel, airConditionsWind, airConditionsChanceRain, airConditionsUvIndex } from "./nodes.js"
 import { getCurrentWeather, getCurrentCityName, getCurrentLocation } from "./services.js"
 import { createCurrentWeather, createTodaysForecastCard, createSevenDaysForecastCard } from "./utils.js"
 
@@ -32,6 +32,10 @@ const homePage = async () => {
     createCurrentWeather(weather, cityName)
     createTodaysForecastCard(weather)
     createSevenDaysForecastCard(weather)
+    airConditionsRealFeel.textContent = `${Math.round(weather.currently.apparentTemperature)}°`
+    airConditionsWind.textContent = `${(weather.currently.windSpeed * 3.6).toFixed(2)} Km/h`
+    airConditionsChanceRain.textContent = `${(weather.currently.precipProbability * 100).toFixed(0)}%`
+    airConditionsUvIndex.textContent = weather.currently.uvIndex
 
 }
 
