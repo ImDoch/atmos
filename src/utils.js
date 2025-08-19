@@ -70,6 +70,8 @@ const createCurrentWeather = (localClimate, currentCityName) => {
 
     const feelsLikeInfo = document.createElement('p')
     feelsLikeInfo.textContent = `Feels Like: ${Math.round(localClimate.currently.apparentTemperature)}°`
+
+    const weatherIconContainer = document.createElement('div')
     const weatherIcon = document.createElement('i')
     weatherIcon.classList.add('wi', `${iconMapping[localClimate.currently.icon]}`)
 
@@ -77,7 +79,8 @@ const createCurrentWeather = (localClimate, currentCityName) => {
     currentTemperature.textContent = `${Math.round(localClimate.currently.temperature)}°`
 
     div.append(cityName, feelsLikeInfo)
-    currentWeatherSection.append(div, weatherIcon, currentTemperature)
+    weatherIconContainer.append(weatherIcon)
+    currentWeatherSection.append(div, weatherIconContainer, currentTemperature)
 }
 
 const createTodaysForecastCard = (localClimate) => {
@@ -118,13 +121,15 @@ const createTodaysForecastCard = (localClimate) => {
         const hour = document.createElement('h3')
         hour.textContent = formatHour(forecast.time)
 
+        const weatherIconContainer = document.createElement('div')
         const weatherIcon = document.createElement('i')
         weatherIcon.classList.add('wi', `${iconMapping[forecast.icon]}`)
 
         const temperature = document.createElement('p')
         temperature.textContent = `${Math.round(forecast.temperature)}°`
 
-        currentForecastCard.append(hour, weatherIcon, temperature)
+        weatherIconContainer.append(weatherIcon)
+        currentForecastCard.append(hour, weatherIconContainer, temperature)
 
         return currentForecastCard
     })
@@ -151,6 +156,7 @@ const createSevenDaysForecastCard = (localClimate) => {
 
         const div = document.createElement('div')
         
+        const weatherIconContainer = document.createElement('div')
         const weatherIcon = document.createElement('i')
         weatherIcon.classList.add('wi', `${iconMapping[forecast.icon]}`)
 
@@ -162,7 +168,8 @@ const createSevenDaysForecastCard = (localClimate) => {
         maxTemperature.textContent = `${Math.round(forecast.apparentTemperatureMax)}°`
         const minTemperature = document.createTextNode(`/${Math.round(forecast.apparentTemperatureMin)}°`)
 
-        div.append(weatherIcon, weatherType)
+        weatherIconContainer.append(weatherIcon)
+        div.append(weatherIconContainer, weatherType)
         minMaxTemperature.append(maxTemperature, minTemperature)
         sevenDaysForecastCard.append(dayOfWeek, div, minMaxTemperature)
         return sevenDaysForecastCard

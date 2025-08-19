@@ -115,8 +115,6 @@ body.light {
 
 .wi {
     color: var(--main-color);
-    line-height: 1;
-    transform: translateY(10%);
 }
 /*header*/
 header {
@@ -225,20 +223,28 @@ header {
             gap: 20px;
             text-align: center;
         }
-        h1 {
-            color: var(--text);
-        }
-        p {
-            color: var(--text-muted);
-        }
-        .wi {
-            font-size: 8rem;
-        }
-        h2 {
-            font-size: var(--fs-h1);
-            color: var(--text);
-        }
         
+        & .current-weather__content {
+            h1 {
+                color: var(--text);
+            }
+            p {
+                color: var(--text-muted);
+            }
+            & div:nth-child(2) {
+                width: 120px;
+                height: 120px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 80px;
+                line-height: 1;
+            }
+            h2 {
+                font-size: var(--fs-h1);
+                color: var(--text);
+            }
+        }
     }
 
     .current-forecast {
@@ -270,8 +276,14 @@ header {
                 h3 {
                     color: var(--text);
                 }
-                .wi {
-                    font-size: 3.5rem;
+                div {
+                    width: 55px;
+                    height: 55px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 35px;
+                    line-height: 1;
                 }
                 p {
                     font-weight: bold;
@@ -322,8 +334,14 @@ header {
                     gap: 8px;
                     color: var(--text);
 
-                    .wi {
-                        font-size: 3rem;
+                    div {
+                        width: 55px;
+                        height: 55px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 35px;
+                        line-height: 1;
                     }
                     h3 {
                         text-transform: capitalize;
@@ -342,18 +360,21 @@ header {
         width: 90%;
         padding: 20px;
         grid-area: air-conditions;
+        display: flex;
+        flex-direction: column;
         border-radius: 20px;
         background-color: var(--bg);
 
         .air-conditions__cards-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
+            margin: auto 0;
             row-gap: 10px;
 
             .air-conditions__card {
                 display: flex;
                 flex-direction: column;
-                gap: 4px;
+                gap: 8px;
 
                 div {
                     display: flex;
