@@ -1,5 +1,5 @@
 //nodos relacionados con el light-dark mode
-const toggleModeButton = document.querySelector('.toggle-mode-button')
+const header = document.querySelector('header')
 const magicIcon = document.querySelector('.magic-icon')
 const termostatIcon = document.querySelector('.termostat-icon')
 const windIcon = document.querySelector('.wind-icon')
@@ -11,8 +11,7 @@ const searchButtonMobile = document.querySelector('.search__button--mobile')
 const mainWeatherContainer = document.querySelector('.weather-grid-container')
 const searchContainer = document.querySelector('.search-results-container')
 const backButton = document.querySelector('.back-button')
-const mobileSearchButton = document.querySelector('.search__button--mobile')
-const searchInput = document.querySelector('.search__input')
+const searchInputs = document.querySelectorAll('.search__input')
 
 //Nodos para renderizar la información
 const currentWeatherSection = document.querySelector('.current-weather__content')
@@ -23,4 +22,4 @@ const airConditionsWind = document.querySelector('.air-conditions__wind')
 const airConditionsChanceRain = document.querySelector('.air-conditions__chance-rain')
 const airConditionsUvIndex = document.querySelector('.air-conditions__uv-index')
 
-export { toggleModeButton, magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon, searchButtonMobile, mainWeatherContainer, searchContainer, backButton, mobileSearchButton, searchInput, currentWeatherSection, currentForecastCardsContainer, sevenDaysForecastCardsContainer, airConditionsRealFeel, airConditionsWind, airConditionsChanceRain, airConditionsUvIndex }
+export { header, magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon, searchButtonMobile, mainWeatherContainer, searchContainer, backButton, searchInputs, currentWeatherSection, currentForecastCardsContainer, sevenDaysForecastCardsContainer, airConditionsRealFeel, airConditionsWind, airConditionsChanceRain, airConditionsUvIndex }

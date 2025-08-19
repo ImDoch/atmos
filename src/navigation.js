@@ -10,6 +10,7 @@ const appNavigator = () => {
         weatherPage()
     }
     else {
+        location.hash = '#home'
         homePage()
     }
     document.documentElement.scrollTop = 0
