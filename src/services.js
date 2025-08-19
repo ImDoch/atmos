@@ -23,4 +23,9 @@ const getCurrentCityName = async (lat, lon) => {
 
     return currentCityityName
 }
-export { getCurrentWeather, getCurrentCityName, getCurrentLocation }
+
+const getInputCities = async (query) => {
+    const cities = fetchData(`https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(query)}&format=json&limit=5`)
+    return cities
+}
+export { getCurrentWeather, getCurrentCityName, getCurrentLocation, getInputCities }

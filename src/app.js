@@ -1,4 +1,4 @@
-import { header, searchInputs } from "./nodes.js"
+import { header, searchInputs, searchForms } from "./nodes.js"
 import { toggleMode } from "./utils.js"
 import { appNavigator } from "./navigation.js"
 
@@ -24,17 +24,12 @@ document.addEventListener('click', (event) => {
     }
 })
 
-document.addEventListener('input', (event) => {
-    const input = event.target
-    if(event.target.matches('.search__input--header')) {
-        location.hash = `#search=${input.value.trim()}`
-        if(input.value === '') {
-            location.hash = '#home'
-        }
-    }
-    else if(event.target.matches('.search__input--mobile')) {
-        location.hash = `#search=${input.value.trim()}`
-    }
+searchForms.forEach(form => {
+    form.addEventListener('submit', (event) => {
+        event.preventDefault()
+        const input = form.querySelector('.search__input')
+        location.hash = input.value.trim() ? `#search=${input.value.trim()}` : '#home'
+    }) 
 })
 
 header.addEventListener('click', (event) => {
@@ -42,9 +37,3 @@ header.addEventListener('click', (event) => {
         toggleMode()
     }
 })
-
-
-
-
-
-
