@@ -16,6 +16,7 @@ const iconMapping = {
   "tornado": "wi-tornado"
 }
 
+//funcion para dar formato a la hora (9:00 PM)
 const formatHour = (timestamp) => {
     const date = new Date(timestamp * 1000)
     return date.toLocaleTimeString('en-US', {
@@ -24,6 +25,7 @@ const formatHour = (timestamp) => {
     });
 }
 
+//funcion para dar formato a los dias (Wed, Thu)
 const formatDay = (timestamp) => {
     const date = new Date(timestamp * 1000)
     return new Intl.DateTimeFormat('en-US', {
@@ -31,6 +33,13 @@ const formatDay = (timestamp) => {
     }).format(date)
 
 }
+
+//funcion para dar formato UTF-8 a strings 
+const fixEncoding = (string) => {
+    const bytes = Uint8Array.from(string, c => c.charCodeAt(0))
+    return new TextDecoder('utf-8').decode(bytes)
+}
+
 //cambio de modo
 const toggleMode = () => {
     document.body.classList.toggle('light')
@@ -178,4 +187,6 @@ const createSevenDaysForecastCard = (localClimate) => {
 }
 
 
-export {toggleMode, createCurrentWeather, createTodaysForecastCard, createSevenDaysForecastCard}
+
+
+export {toggleMode, createCurrentWeather, createTodaysForecastCard, createSevenDaysForecastCard, fixEncoding}

@@ -1,5 +1,5 @@
 import { mainWeatherContainer, searchContainer, backButton, airConditionsRealFeel, airConditionsWind, airConditionsChanceRain, airConditionsUvIndex } from "./nodes.js"
-import { getCurrentWeather, getCurrentCityName, getCurrentLocation } from "./services.js"
+import { getCurrentWeather, getCurrentLocation, getInputCities } from "./services.js"
 import { createCurrentWeather, createTodaysForecastCard, createSevenDaysForecastCard } from "./utils.js"
 
 const appNavigator = () => {
@@ -22,11 +22,8 @@ const homePage = async () => {
     searchContainer.classList.add('hidden')
     backButton.classList.add('hidden')
 
-    const location = await getCurrentLocation()
-    const lat = location.coords.latitude
-    const lon = location.coords.longitude
+    const { cityName, lat, lon } = await getCurrentLocation()
     const weather = await getCurrentWeather(lat, lon)
-    const cityName = await getCurrentCityName(lat, lon)
 
     console.log(weather)
 
@@ -46,10 +43,17 @@ const weatherPage = () => {
     backButton.classList.remove('hidden')
 }
 
-const searchPage = () => {
+const searchPage = async () => {
     mainWeatherContainer.classList.add('hidden')
     searchContainer.classList.remove('hidden')
     backButton.classList.remove('hidden')
+
+    const [_, query] = location.hash.split('=')
+    if(query !== '') {
+        const cities = await getInputCities(query)
+        console.log(cities)
+    }
+    
 }
 
 export { appNavigator }
