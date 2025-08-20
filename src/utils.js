@@ -1,4 +1,5 @@
-import { magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon, currentWeatherSection, currentForecastCardsContainer, sevenDaysForecastCardsContainer } from "./nodes.js"
+import { magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon, currentWeatherSection, currentForecastCardsContainer, sevenDaysForecastCardsContainer, searchResultsCardsContainer } from "./nodes.js"
+import { getCurrentWeather } from "./services.js"
 
 const iconMapping = {
   "clear-day": "wi-day-sunny",
@@ -74,7 +75,7 @@ const createCurrentWeather = (localClimate, currentCityName) => {
     if (currentCityName === undefined ) {
         cityName.textContent = 'ciudad'
     } else {
-        cityName.textContent = currentCityName
+        cityName.textContent = fixEncoding(currentCityName)
     }
 
     const feelsLikeInfo = document.createElement('p')
@@ -186,7 +187,42 @@ const createSevenDaysForecastCard = (localClimate) => {
     sevenDaysForecastCardsContainer.append(...sevenDaysForecastCards)
 }
 
+const createSearchResultsCard = async (searchLocation) => {
+    searchResultsCardsContainer.innerHTML = ''
+
+    const searchResultsCards = await Promise.all(
+        searchLocation.features.map(async (location) => {
+            const lat = location.properties.lat
+            const lon = location.properties.lon
+            const locationWeather = await getCurrentWeather(lat, lon)
+
+            const searchResultsCard = document.createElement('article')
+            searchResultsCard.classList.add('search-results__card')
+
+            const weatherIconContainer = document.createElement('div')
+
+            const weatherIcon = document.createElement('i')
+            weatherIcon.classList.add('wi', `${iconMapping[locationWeather.currently.icon]}`)
+
+            const locationInfoContainer = document.createElement('div')
+
+            const cityName = document.createElement('h2')
+            cityName.textContent = location.properties.city
+
+            const countryName = document.createElement('p')
+            countryName.textContent = location.properties.country
+
+            const locationTemperature = document.createElement('h3')
+            locationTemperature.textContent = `${Math.round(locationWeather.currently.temperature)}°`
+
+            weatherIconContainer.append(weatherIcon)
+            locationInfoContainer.append(cityName, countryName)
+            searchResultsCard.append(weatherIconContainer, locationInfoContainer, locationTemperature)
+            return searchResultsCard
+        })
+    )
+    searchResultsCardsContainer.append(...searchResultsCards)
+}
 
 
-
-export {toggleMode, createCurrentWeather, createTodaysForecastCard, createSevenDaysForecastCard, fixEncoding}
+export { toggleMode, createCurrentWeather, createTodaysForecastCard, createSevenDaysForecastCard, createSearchResultsCard }

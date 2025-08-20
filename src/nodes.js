@@ -24,6 +24,7 @@ const airConditionsRealFeel = document.querySelector('.air-conditions__real-feel
 const airConditionsWind = document.querySelector('.air-conditions__wind')
 const airConditionsChanceRain = document.querySelector('.air-conditions__chance-rain')
 const airConditionsUvIndex = document.querySelector('.air-conditions__uv-index')
+const searchResultsCardsContainer = document.querySelector('.search-results__cards-container')
 
 
-export { header, magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon, searchButtonMobile, mainWeatherContainer, searchContainer, backButton, searchInputs, currentWeatherSection, currentForecastCardsContainer, sevenDaysForecastCardsContainer, airConditionsRealFeel, airConditionsWind, airConditionsChanceRain, airConditionsUvIndex, searchForms }
+export { header, magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon, searchButtonMobile, mainWeatherContainer, searchContainer, backButton, searchInputs, currentWeatherSection, currentForecastCardsContainer, sevenDaysForecastCardsContainer, airConditionsRealFeel, airConditionsWind, airConditionsChanceRain, airConditionsUvIndex, searchForms, searchResultsCardsContainer }

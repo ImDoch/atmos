@@ -1,6 +1,6 @@
 import { mainWeatherContainer, searchContainer, backButton, airConditionsRealFeel, airConditionsWind, airConditionsChanceRain, airConditionsUvIndex } from "./nodes.js"
-import { getCurrentWeather, getCurrentLocation, getInputCities } from "./services.js"
-import { createCurrentWeather, createTodaysForecastCard, createSevenDaysForecastCard } from "./utils.js"
+import { getCurrentWeather, getCurrentLocation, getSearchCities } from "./services.js"
+import { createCurrentWeather, createTodaysForecastCard, createSevenDaysForecastCard,createSearchResultsCard } from "./utils.js"
 
 const appNavigator = () => {
     if(location.hash.startsWith('#search=')) {
@@ -50,8 +50,8 @@ const searchPage = async () => {
 
     const [_, query] = location.hash.split('=')
     if(query !== '') {
-        const cities = await getInputCities(query)
-        console.log(cities)
+        const cities = await getSearchCities(query)
+        createSearchResultsCard(cities)
     }
     
 }

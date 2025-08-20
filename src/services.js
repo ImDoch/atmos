@@ -1,5 +1,5 @@
 import { PIRATE_WEATHER_API_KEY, GEOAPIFY_API_KEY } from "./api-keys.js"
-import { fixEncoding } from "./utils.js"
+
 
 const fetchData = async (url) => {
     const response = await fetch(url)
@@ -14,7 +14,7 @@ const getCurrentWeather = async (lat, lon) => {
 
 const getCurrentLocation = async () => {
     const locationInfo = await fetchData(`https://api.geoapify.com/v1/ipinfo?apiKey=${GEOAPIFY_API_KEY}`)
-    const cityName = fixEncoding(locationInfo.city.name)
+    const cityName = locationInfo.city.name
     const lat = locationInfo.location.latitude
     const lon = locationInfo.location.longitude
     return {
@@ -24,10 +24,10 @@ const getCurrentLocation = async () => {
     }
 }
 
-const getInputCities = async (query) => {
+const getSearchCities = async (query) => {
     const cities = fetchData(`https://api.geoapify.com/v1/geocode/search?text=${encodeURIComponent(query)}&apiKey=${GEOAPIFY_API_KEY}`)
     return cities
 }
 
 
-export { getCurrentWeather, getCurrentLocation , getInputCities }
+export { getCurrentWeather, getCurrentLocation , getSearchCities }

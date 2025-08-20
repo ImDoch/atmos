@@ -1,4 +1,4 @@
-import { header, searchInputs, searchForms } from "./nodes.js"
+import { header, searchInputs, searchForms, searchResultsCardsContainer } from "./nodes.js"
 import { toggleMode } from "./utils.js"
 import { appNavigator } from "./navigation.js"
 
@@ -12,12 +12,14 @@ document.addEventListener('click', (event) => {
         searchInputs.forEach(input => {
             input.value = ''
         })
+        searchResultsCardsContainer.innerHTML = ''
     }
     else if (event.target.closest('.header__logo')) {
         location.hash = '#home'
         searchInputs.forEach(input => {
             input.value = ''
         })
+        searchResultsCardsContainer.innerHTML = ''
     }
     else if (event.target.closest('.search__button--mobile')) {
         location.hash = '#search='
