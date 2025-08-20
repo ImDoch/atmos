@@ -166,18 +166,15 @@ const createSevenDaysForecastCard = (localClimate) => {
         const weatherIcon = document.createElement('i')
         weatherIcon.classList.add('wi', `${iconMapping[forecast.icon]}`)
 
-        const weatherType = document.createElement('h3')
-        weatherType.textContent = forecast.precipType
-
-        const minMaxTemperature = document.createElement('p')
-        const maxTemperature = document.createElement('span')
+        const maxTemperature = document.createElement('h3')
         maxTemperature.textContent = `${Math.round(forecast.apparentTemperatureMax)}°`
-        const minTemperature = document.createTextNode(`/${Math.round(forecast.apparentTemperatureMin)}°`)
+        
+        const minTemperature = document.createElement('p')
+        minTemperature.textContent = `min: ${Math.round(forecast.apparentTemperatureMin)}°`
 
         weatherIconContainer.append(weatherIcon)
-        div.append(weatherIconContainer, weatherType)
-        minMaxTemperature.append(maxTemperature, minTemperature)
-        sevenDaysForecastCard.append(dayOfWeek, div, minMaxTemperature)
+        div.append(weatherIconContainer, maxTemperature)
+        sevenDaysForecastCard.append(dayOfWeek, div, minTemperature)
         return sevenDaysForecastCard
     })
     sevenDaysForecastCardsContainer.append(...sevenDaysForecastCards)
