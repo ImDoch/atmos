@@ -1,4 +1,4 @@
-import { magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon, currentWeatherSection, currentForecastCardsContainer, sevenDaysForecastCardsContainer, searchResultsCardsContainer } from "./nodes.js"
+import { magicIcon, termostatIcon, windIcon, rainIcon, uvIndexIcon, currentWeatherSection, currentForecastCardsContainer, sevenDaysForecastCardsContainer, airConditionsRealFeel, airConditionsWind, airConditionsChanceRain, airConditionsUvIndex, searchResultsCardsContainer } from "./nodes.js"
 import { getCurrentWeather } from "./services.js"
 
 const iconMapping = {
@@ -66,18 +66,14 @@ const toggleMode = () => {
 }
 
 //crear elementos dinamicos de current weather
-const createCurrentWeather = (localClimate, currentCityName) => {
+const createCurrentWeather = (localClimate, cityNameText) => {
     currentWeatherSection.innerHTML = ''
 
     const div = document.createElement('div')
 
     const cityName = document.createElement('h1')
-    if (currentCityName === undefined ) {
-        cityName.textContent = 'ciudad'
-    } else {
-        cityName.textContent = fixEncoding(currentCityName)
-    }
-
+    cityName.textContent = fixEncoding(cityNameText)
+    
     const feelsLikeInfo = document.createElement('p')
     feelsLikeInfo.textContent = `Feels Like: ${Math.round(localClimate.currently.apparentTemperature)}°`
 
@@ -187,13 +183,20 @@ const createSevenDaysForecastCard = (localClimate) => {
     sevenDaysForecastCardsContainer.append(...sevenDaysForecastCards)
 }
 
+const fillAirConditionsContainer = (weather) => {
+    airConditionsRealFeel.textContent = `${Math.round(weather.currently.apparentTemperature)}°`
+    airConditionsWind.textContent = `${(weather.currently.windSpeed * 3.6).toFixed(2)} Km/h`
+    airConditionsChanceRain.textContent = `${(weather.currently.precipProbability * 100).toFixed(0)}%`
+    airConditionsUvIndex.textContent = weather.currently.uvIndex
+}
+
 const createSearchResultsCard = async (searchLocation) => {
     searchResultsCardsContainer.innerHTML = ''
 
     const searchResultsCards = await Promise.all(
-        searchLocation.features.map(async (location) => {
-            const lat = location.properties.lat
-            const lon = location.properties.lon
+        searchLocation.features.map(async (feature) => {
+            const lat = feature.properties.lat
+            const lon = feature.properties.lon
             const locationWeather = await getCurrentWeather(lat, lon)
 
             const searchResultsCard = document.createElement('article')
@@ -207,10 +210,11 @@ const createSearchResultsCard = async (searchLocation) => {
             const locationInfoContainer = document.createElement('div')
 
             const cityName = document.createElement('h2')
-            cityName.textContent = location.properties.city
+            const cityNameText = feature.properties.city || feature.properties.name
+            cityName.textContent = cityNameText
 
             const countryName = document.createElement('p')
-            countryName.textContent = location.properties.country
+            countryName.textContent = feature.properties.country
 
             const locationTemperature = document.createElement('h3')
             locationTemperature.textContent = `${Math.round(locationWeather.currently.temperature)}°`
@@ -218,6 +222,15 @@ const createSearchResultsCard = async (searchLocation) => {
             weatherIconContainer.append(weatherIcon)
             locationInfoContainer.append(cityName, countryName)
             searchResultsCard.append(weatherIconContainer, locationInfoContainer, locationTemperature)
+
+            searchResultsCard.addEventListener('click', async () => {
+                location.hash = `#weather=${feature.properties.city}-${feature.properties.country}`
+                createCurrentWeather(locationWeather, cityNameText)
+                createTodaysForecastCard(locationWeather)
+                createSevenDaysForecastCard(locationWeather)
+                fillAirConditionsContainer(locationWeather)
+            })
+
             return searchResultsCard
         })
     )
@@ -225,4 +238,4 @@ const createSearchResultsCard = async (searchLocation) => {
 }
 
 
-export { toggleMode, createCurrentWeather, createTodaysForecastCard, createSevenDaysForecastCard, createSearchResultsCard }
+export { toggleMode, createCurrentWeather, createTodaysForecastCard, createSevenDaysForecastCard, fillAirConditionsContainer, createSearchResultsCard }

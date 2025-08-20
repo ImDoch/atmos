@@ -1,6 +1,6 @@
-import { mainWeatherContainer, searchContainer, backButton, airConditionsRealFeel, airConditionsWind, airConditionsChanceRain, airConditionsUvIndex } from "./nodes.js"
+import { mainWeatherContainer, searchContainer, backButton } from "./nodes.js"
 import { getCurrentWeather, getCurrentLocation, getSearchCities } from "./services.js"
-import { createCurrentWeather, createTodaysForecastCard, createSevenDaysForecastCard,createSearchResultsCard } from "./utils.js"
+import { createCurrentWeather, createTodaysForecastCard, createSevenDaysForecastCard,createSearchResultsCard, fillAirConditionsContainer } from "./utils.js"
 
 const appNavigator = () => {
     if(location.hash.startsWith('#search=')) {
@@ -25,16 +25,10 @@ const homePage = async () => {
     const { cityName, lat, lon } = await getCurrentLocation()
     const weather = await getCurrentWeather(lat, lon)
 
-    console.log(weather)
-
     createCurrentWeather(weather, cityName)
     createTodaysForecastCard(weather)
     createSevenDaysForecastCard(weather)
-    airConditionsRealFeel.textContent = `${Math.round(weather.currently.apparentTemperature)}°`
-    airConditionsWind.textContent = `${(weather.currently.windSpeed * 3.6).toFixed(2)} Km/h`
-    airConditionsChanceRain.textContent = `${(weather.currently.precipProbability * 100).toFixed(0)}%`
-    airConditionsUvIndex.textContent = weather.currently.uvIndex
-
+    fillAirConditionsContainer(weather)
 }
 
 const weatherPage = () => {
