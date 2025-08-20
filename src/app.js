@@ -30,7 +30,7 @@ searchForms.forEach(form => {
     form.addEventListener('submit', (event) => {
         event.preventDefault()
         const input = form.querySelector('.search__input')
-        location.hash = input.value.trim() ? `#search=${input.value.trim()}` : '#home'
+        location.hash = input.value.trim() ? `#search=${encodeURIComponent(input.value.trim())}` : '#home'
     }) 
 })
 

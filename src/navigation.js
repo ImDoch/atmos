@@ -42,7 +42,8 @@ const searchPage = async () => {
     searchContainer.classList.remove('hidden')
     backButton.classList.remove('hidden')
 
-    const [_, query] = location.hash.split('=')
+    const params = new URLSearchParams(location.hash.slice(1))
+    const query = params.get('search') || ''
     if(query !== '') {
         const cities = await getSearchCities(query)
         createSearchResultsCard(cities)
